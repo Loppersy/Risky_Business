@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace Risky_Business
 {
-    public class APICaller
+    public static class APICaller
     {
-        public async Task ReturnStatus(string url0, string url1)
+
+
+        // set guard properties
+
+
+
+        public async Task<ResponseModel> ReturnStatus(string url0, string url1)
         {
             string apiUrl = url0;
             string targetUrl = url1;
@@ -17,9 +23,23 @@ namespace Risky_Business
             using (HttpResponseMessage response = await CallGateway.APIClient.GetAsync(apiUrl))
             // await a response from the api and record the response code
             {
+
+
+                // set guard statements
+
+
+
                 if(response.IsSuccessStatusCode)
                 {
-                    // Deal with returned data
+                    ResponseModel data = await response.Content.ReadAsAsync<ResponseModel>();
+                    // Deal with reponse data
+
+                    return data;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                    // create a reason labeled exception
                 }
             }
         }

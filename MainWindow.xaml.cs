@@ -8,6 +8,8 @@
     public MainWindow()
     {
       InitializeComponent();
+            CallGateway.Initialize();
+            // create the framework for calls
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,9 +13,12 @@ namespace Risky_Business
         public MainWindow()
         {
             InitializeComponent();
-            
-            
+            CallGateway.Initialize();
+
+
+                       
         }
+        
         private void txtSearch_TextChanged(Object sender, TextChangedEventArgs e)
 
         {
@@ -25,8 +29,17 @@ namespace Risky_Business
         {
             string input = TxtSearch.Text;
             input = input.Trim();
-            
+
             //** Put code that uses input here**//
+
+
+            private async Task GetData()
+            {
+                var data = await ReturnData(apiUrl, input);
+                // unfinished
+            }
+
+
         }
     }
 }

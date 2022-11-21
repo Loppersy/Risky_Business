@@ -20,5 +20,13 @@ namespace Risky_Business
         {
             TxtSearchPlaceholder.Visibility = TxtSearch.Text != "" ? Visibility.Hidden : Visibility.Visible;
         }
+
+        private void RunButtonPressed(object sender, RoutedEventArgs e)
+        {
+            string input = TxtSearch.Text;
+            input = input.Trim();
+            
+            //** Put code that uses input here**//
+        }
     }
 }

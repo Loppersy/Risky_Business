@@ -22,7 +22,8 @@
             Type an URL in the textbox below. It will be processed by multiple third party services with the use of API calls to output a 'trust score'.
         </TextBlock>
         
-        <Button x:Name="Button" Height="30" Width="300" VerticalAlignment="Bottom" Margin="80" Content="ANALYSE!">
+        <Button x:Name="RunButton" Height="30" Width="300" VerticalAlignment="Bottom" Margin="80" Content="ANALYSE!"
+                Click="RunButtonPressed">
             
         </Button>
     </Grid>

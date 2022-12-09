@@ -15,7 +15,7 @@ namespace Risky_Business
 
 
 
-        public async Task<ResponseModel> ReturnData(string url0, string url1)
+        public static async Task<ResponseModel> ReturnData(string url0, string url1)
         {
             string apiUrl = url0;
             string targetUrl = url1;

@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+using Risky_Business.Commands;
+using Risky_Business.ViewModels;
+using Risky_Business.Views;
 
 namespace Risky_Business
 {
@@ -13,33 +19,49 @@ namespace Risky_Business
         public MainWindow()
         {
             InitializeComponent();
+            
+            //Source for changing views https://github.com/SingletonSean/wpf-tutorials/tree/master/SwitchingViewsMVVM
+            DataContext = new MainViewModel();
+            
+
             CallGateway.Initialize();
 
 
-                       
+
+        }
+
+        private void IntroButtonPressed(object sender, RoutedEventArgs e)
+        {
+            IntroButton.IsEnabled = false;
+            AnalysisButton.IsEnabled = true;
         }
         
-        private void txtSearch_TextChanged(Object sender, TextChangedEventArgs e)
-
+        private void AnalyseButtonPressed(object sender, RoutedEventArgs e)
         {
-            TxtSearchPlaceholder.Visibility = TxtSearch.Text != "" ? Visibility.Hidden : Visibility.Visible;
-        }
+            AnalysisButton.IsEnabled = false;
+            IntroButton.IsEnabled = true;
+            
+            string input = "";
 
-        private void RunButtonPressed(object sender, RoutedEventArgs e)
-        {
-            string input = TxtSearch.Text;
+            input = IntroView.inputTextBox.Text;
+
+            
             input = input.Trim();
-
+            Trace.WriteLine(input);
             //** Put code that uses input here**//
-
-
-            private async Task GetData()
+        
+        
+            async Task GetData()
             {
-                var data = await ReturnData(apiUrl, input);
+                //////Test
+                string apiUrl = "epicGoogleAPI";
+                //////
+                
+                
+                var data = await APICaller.ReturnData(apiUrl, input);
                 // unfinished
             }
-
-
+            
         }
     }
 }

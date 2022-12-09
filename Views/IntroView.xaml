@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Risky_Business.Views.IntroView" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Risky_Business.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+
+        <Grid>
+            <TextBlock Margin="10" TextWrapping="Wrap" Height="275" VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
+                <Bold>RISKY BUSINESS: URLS Malware Analysis</Bold>
+            </TextBlock>
+            <TextBox x:Name="TxtSearch" Height="30" Width="400" TextChanged="txtSearch_TextChanged" x:FieldModifier="public"
+                     VerticalAlignment="Center" Padding="2,5,0,0">
+            </TextBox>
+            <Label x:Name="TxtSearchPlaceholder" Content="http://example.com/"
+                   Background="Transparent" Opacity="0.5"
+                   IsHitTestVisible="False" Height="30" Width="400" />
+            <TextBlock x:Name="Instructions" TextWrapping="WrapWithOverflow"
+                       Background="Transparent" Opacity="1"
+                       IsHitTestVisible="False" Height="200" Width="300">
+                Type an URL in the textbox below. It will be processed by multiple third party services with the use of API calls to output a 'trust score'.
+            </TextBlock>
+        </Grid>
+</UserControl>

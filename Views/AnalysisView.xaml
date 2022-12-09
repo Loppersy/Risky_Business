@@ -8,18 +8,26 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Background="White">
+    
     <Grid RenderTransformOrigin="0.5 0.5">
-        <TextBlock Margin="10" TextWrapping="Wrap" Height="275" VerticalAlignment="Center"
+        <TextBlock Name="AnalysisTitle" Margin="10,30,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
                    HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
                    FontSize="24" FontWeight="700" LineHeight="32">
-            <Bold>Analysis Results</Bold>
+            <Bold>Analysis results for &lt;placeholder&gt;</Bold>
         </TextBlock>
 
 
         <TextBlock x:Name="Results" TextWrapping="WrapWithOverflow"
                    Background="Transparent" Opacity="1"
-                   IsHitTestVisible="False" Height="200" Width="300" FontFamily="Product Sans">
-            ANALYSYSANALYSYSANALYSYS ANALYSYS ANALYSYSANALYSYS ANALYSYSANALYSYSANALYSYSANALYSYSANALYSYS ANALYSYSANALYSYS
+                   IsHitTestVisible="False" Height="200" Width="400" 
+                   FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="18" FontWeight="400" LineHeight="35"
+                   Padding="0,10,0,40">
+            <Bold>API Number 1:</Bold> {Result} <LineBreak/>
+            <Bold>API Number 2:</Bold> {Result} <LineBreak/>
+            <Bold>API Number 3:</Bold> {Result} <LineBreak/>
+            <Bold>API Number 4:</Bold> {Result} <LineBreak/>
+            <Bold>API Number 5:</Bold> {Result} <LineBreak/>
         </TextBlock>
         <wpf:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}"
                       Height="225" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="100,0,0,10">

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Risky_Business.Commands;
 using Risky_Business.ViewModels;
 using Risky_Business.Views;
+using Risky_Business;
 
 namespace Risky_Business
 {
@@ -16,18 +17,17 @@ namespace Risky_Business
     /// </summary>
     public partial class MainWindow
     {
+        public static MainViewModel mainViewModel = new MainViewModel();
         public MainWindow()
         {
+            
             InitializeComponent();
             
-            //Source for changing views https://github.com/SingletonSean/wpf-tutorials/tree/master/SwitchingViewsMVVM
-            DataContext = new MainViewModel();
             
-
+            //Source for changing views https://github.com/SingletonSean/wpf-tutorials/tree/master/SwitchingViewsMVVM
+            DataContext = mainViewModel;
+            
             CallGateway.Initialize();
-
-
-
         }
 
         private void IntroButtonPressed(object sender, RoutedEventArgs e)
@@ -41,8 +41,11 @@ namespace Risky_Business
             set => AnalysisButton.IsEnabled = value;
         }
 
-        private void AnalyseButtonPressed(object sender, RoutedEventArgs e)
+        private async void AnalyseButtonPressed(object sender, RoutedEventArgs e)
         {
+            
+            mainViewModel.UpdateViewCommand.Execute("Analysis");
+            
             AnalysisButton.IsEnabled = false;
             IntroButton.IsEnabled = true;
             
@@ -55,6 +58,7 @@ namespace Risky_Business
             Trace.WriteLine(input);
             //** Put code that uses input here**//
         
+            
         
             async Task GetData()
             {
@@ -66,7 +70,10 @@ namespace Risky_Business
                 var data = await APICaller.ReturnData(apiUrl, input);
                 // unfinished
             }
-            
+
+            await Task.Delay(100);
+            AnalysisView.DisplayResults(input);
+
         }
     }
 }

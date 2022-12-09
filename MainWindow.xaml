@@ -7,21 +7,22 @@
         mc:Ignorable="d"
         Title="Risky Business" Height="500" Width="700">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
-                <ContentControl Content="{Binding SelectedViewModel}"/>
+        <ContentControl Content="{Binding SelectedViewModel}" />
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Name="IntroButton" Margin="10" Width="200" Content="Back" Command="{Binding UpdateViewCommand}" CommandParameter="Intro"
-                            Click="IntroButtonPressed" IsEnabled="False"/>
-                    <Button Name="AnalysisButton" Margin="10" Width="200" Content="ANALYSE!" Command="{Binding UpdateViewCommand}" CommandParameter="Analysis"
-                            Click="AnalyseButtonPressed" IsEnabled="False"/>
-                </StackPanel>
-            </Grid>
-    
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <Button Name="IntroButton" Margin="10" Width="200" Content="Back" Command="{Binding UpdateViewCommand}"
+                    CommandParameter="Intro"
+                    Click="IntroButtonPressed" IsEnabled="False" />
+            <Button Name="AnalysisButton" Margin="10" Width="200" Content="ANALYSE!"
+                    Click="AnalyseButtonPressed" IsEnabled="False" />
+        </StackPanel>
+    </Grid>
+
 </Window>
-

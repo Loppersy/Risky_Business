@@ -9,19 +9,24 @@
 
         <Grid>
             <TextBlock Margin="10" TextWrapping="Wrap" Height="275" VerticalAlignment="Center"
-                       HorizontalAlignment="Center">
-                <Bold>RISKY BUSINESS: URLS Malware Analysis</Bold>
+                       HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
+                       FontSize="24" FontWeight="700" LineHeight="32">
+                <Bold>Risky business: URL malware analysis</Bold>
             </TextBlock>
-            <TextBox x:Name="TxtSearch" Height="30" Width="400" TextChanged="txtSearch_TextChanged" x:FieldModifier="public"
-                     VerticalAlignment="Center" Padding="2,5,0,0">
-            </TextBox>
-            <Label x:Name="TxtSearchPlaceholder" Content="http://example.com/"
-                   Background="Transparent" Opacity="0.5"
-                   IsHitTestVisible="False" Height="30" Width="400" />
             <TextBlock x:Name="Instructions" TextWrapping="WrapWithOverflow"
                        Background="Transparent" Opacity="1"
-                       IsHitTestVisible="False" Height="200" Width="300">
+                       IsHitTestVisible="False" Height="200" Width="400" 
+                       FontFamily="Product Sans" Foreground="#5F6368"
+                       FontSize="18" FontWeight="400" LineHeight="28"
+                       Padding="0,10,0,40">
                 Type an URL in the textbox below. It will be processed by multiple third party services with the use of API calls to output a 'trust score'.
             </TextBlock>
+            <TextBox x:Name="TxtSearch" Height="30" Width="400" TextChanged="txtSearch_TextChanged"
+                     VerticalAlignment="Center" Padding="2,5,0,0" FontFamily="Product Sans"
+                     Margin="0,50,0,0">
+            </TextBox>
+            <Label x:Name="TxtSearchPlaceholder" Content="http://example.com/" FontFamily="Product Sans"
+                   Background="Transparent" Opacity="0.5"
+                   IsHitTestVisible="False" Height="30" Width="400" Margin="0,52,0,0"/>
         </Grid>
 </UserControl>

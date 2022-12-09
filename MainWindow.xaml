@@ -19,7 +19,7 @@
                     <Button Name="IntroButton" Margin="10" Width="200" Content="Back" Command="{Binding UpdateViewCommand}" CommandParameter="Intro"
                             Click="IntroButtonPressed" IsEnabled="False"/>
                     <Button Name="AnalysisButton" Margin="10" Width="200" Content="ANALYSE!" Command="{Binding UpdateViewCommand}" CommandParameter="Analysis"
-                            Click="AnalyseButtonPressed"/>
+                            Click="AnalyseButtonPressed" IsEnabled="False"/>
                 </StackPanel>
             </Grid>
     

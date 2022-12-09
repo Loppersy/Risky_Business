@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Risky_Business.ViewModels;
 
 namespace Risky_Business.Views
 {
@@ -18,6 +19,7 @@ namespace Risky_Business.Views
 
         {
             TxtSearchPlaceholder.Visibility = TxtSearch.Text != "" ? Visibility.Hidden : Visibility.Visible;
+            (Application.Current.MainWindow as MainWindow).IsAnalyseButtonEnabled = TxtSearch.Text != "";
         }
     }
 }

@@ -33,9 +33,14 @@ namespace Risky_Business
         private void IntroButtonPressed(object sender, RoutedEventArgs e)
         {
             IntroButton.IsEnabled = false;
-            AnalysisButton.IsEnabled = true;
         }
-        
+
+        public bool IsAnalyseButtonEnabled
+        {
+            get => AnalysisButton.IsEnabled;
+            set => AnalysisButton.IsEnabled = value;
+        }
+
         private void AnalyseButtonPressed(object sender, RoutedEventArgs e)
         {
             AnalysisButton.IsEnabled = false;
@@ -53,7 +58,7 @@ namespace Risky_Business
         
             async Task GetData()
             {
-                //////Test
+                ////// Testing string just so that the program is able to compile
                 string apiUrl = "epicGoogleAPI";
                 //////
                 

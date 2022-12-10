@@ -23,8 +23,11 @@ namespace Risky_Business
     {
         // google APIKEY:AIzaSyC9qH7P3w_1iLRdIZ4iS8SYLNtZcThTCdI
 
-        new string[] apiList = { "https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyC9qH7P3w_1iLRdIZ4iS8SYLNtZcThTCdI" };
-        new string[] apiHeaderList = { null };
+        new string[] apiList =
+            {"https://safebrowsing.googleapis.com/v4/threatMatches:find?key=AIzaSyC9qH7P3w_1iLRdIZ4iS8SYLNtZcThTCdI"};
+
+        new string[] apiHeaderList = {null};
+
         string requestBody;
         // create list of APIs and their required content
 
@@ -43,15 +46,16 @@ namespace Risky_Business
 
         APICaller Caller = new APICaller();
         public static MainViewModel mainViewModel = new MainViewModel();
+
         public MainWindow()
         {
-            
+
             InitializeComponent();
-            
-            
+
+
             //Source for changing views https://github.com/SingletonSean/wpf-tutorials/tree/master/SwitchingViewsMVVM
             DataContext = mainViewModel;
-            
+
             CallGateway.Initialize();
         }
 
@@ -68,87 +72,95 @@ namespace Risky_Business
 
         private async void AnalyseButtonPressed(object sender, RoutedEventArgs e)
         {
-            
+
             mainViewModel.UpdateViewCommand.Execute("Analysis");
-            
+
             AnalysisButton.IsEnabled = false;
             IntroButton.IsEnabled = true;
-            
+
             string input = "";
 
             input = IntroView.inputTextBox.Text;
 
-            
+
             input = input.Trim();
-            List<bool> isGoodList;
+            List<bool> isGoodList = null;
 
-            //input = $"https/{ input }";
+            input = $"https/{ input }";
             //check on https start? or otherwise good input?
-
-            for (int iteration = 0; iteration < apiList.Length; iteration++)
-            {
-
-                // Create a request to the API URL
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiList[iteration]);
-                request.ContentType = "application/json";
-                // set content type, should be the same for all APIs
-                
-
-
-                if (iteration == 0)
-                {
-                    request.Method = "POST";
-                    // create list of APIs and their required content
-                    requestBody =  $"\"client\": {{\"clientId\": \"riskybusiness\", \"clientVersion\": \".3\" }}, \"threatInfo\": {{\"threatTypes\": [\"MALWARE\"], \"platformTypes\": [\"WINDOWS\"],\"threatEntryTypes\": [\"URL\"],\"threatEntries\": [{{\"url\": \"{ input }\"}}]}}";
-
-                }
-                // if google API
-
-
-                if ((apiHeaderList[iteration]) != null)
-                {
-                    request.Headers.Add(apiHeaderList[iteration]);
-                }
-                // add the header if necessary
-
-                // Execute the request and get the response            
-                // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                HttpResponseMessage responseMessage = await CallGateway.APIClient.GetAsync(apiList[iteration]);
-
-                if (responseMessage.IsSuccessStatusCode)
-                {
-
-                    ResponseModel data = await responseMessage.Content.ReadAsAsync<ResponseModel>();
-                    // Capture response data
-
-                    isGoodList.Add(data.matches == null);
-                    // if no hits in the malware database then perfect
-                }
-                else
-                {
-                    throw new Exception(responseMessage.ReasonPhrase);
-                    // create a reason labeled exception
-                    
-                }
-            Trace.WriteLine(input);
-            //** Put code that uses input here**//
-        
             
-        
-            async Task GetData()
-            {
-                ////// Testing string just so that the program is able to compile
-                string apiUrl = "epicGoogleAPI";
-                //////
-                
-                
-                var data = await APICaller.ReturnData(apiUrl, input);
-                // unfinished
-            }
-
+             for (int iteration = 0; iteration < apiList.Length; iteration++)
+             {
+            
+                 // Create a request to the API URL
+                 HttpWebRequest request = (HttpWebRequest) WebRequest.Create(apiList[iteration]);
+                 request.ContentType = "application/json";
+                 // set content type, should be the same for all APIs
+            
+            
+            
+                 if (iteration == 0)
+                 {
+                     request.Method = "POST";
+                     // create list of APIs and their required content
+                     requestBody =
+                         $"\"client\": {{\"clientId\": \"riskybusiness\", \"clientVersion\": \".3\" }}, \"threatInfo\": {{\"threatTypes\": [\"MALWARE\"], \"platformTypes\": [\"WINDOWS\"],\"threatEntryTypes\": [\"URL\"],\"threatEntries\": [{{\"url\": \"{input}\"}}]}}";
+            
+                 }
+                 // if google API
+            
+            
+                 if ((apiHeaderList[iteration]) != null)
+                 {
+                     request.Headers.Add(apiHeaderList[iteration]);
+                 }
+                 // add the header if necessary
+            
+                 // Execute the request and get the response            
+                 // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                 HttpResponseMessage responseMessage = await CallGateway.APIClient.GetAsync(apiList[iteration]);
+            
+                 if (responseMessage.IsSuccessStatusCode)
+                 {
+            
+                     ResponseModel data = await responseMessage.Content.ReadAsAsync<ResponseModel>();
+                     // Capture response data
+            
+                     isGoodList.Add(data.matches == null);
+                     // if no hits in the malware database then perfect
+                 }
+                 else
+                 {
+                     throw new Exception(responseMessage.ReasonPhrase);
+                     // create a reason labeled exception
+            
+                 }
+            
+                 Trace.WriteLine(input);
+                 //** Put code that uses input here**//
+            
+            
+            
+                 async Task GetData()
+                 {
+                     ////// Testing string just so that the program is able to compile
+                     string apiUrl = "epicGoogleAPI";
+                     //////
+            
+            
+                     var data = await APICaller.ReturnData(apiUrl, input);
+                     // unfinished
+                 }
+            
+             }
             await Task.Delay(100);
-            AnalysisView.DisplayResults(input);
-
+            ///////
+            // Test variables, replace with actual analysis output later
+            string[] notes = {"All gucci","","Yes","idk rick, looks fake to me","ok sure"};
+            int[] votes = {0, 2, 0,1,0};
+            ///////
+            
+            AnalysisView.DisplayResults(input,votes,notes);
         }
     }
 }

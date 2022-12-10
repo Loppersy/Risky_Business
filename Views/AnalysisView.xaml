@@ -15,7 +15,7 @@
             <Bold>Analysis results</Bold>
         </TextBlock>
         <TextBlock Name="AnalysedURL" Margin="10,45,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
-                   HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
+                   HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#5F6368"
                    FontSize="11" LineHeight="32">
             Analysed URL: &lt;placeholder&gt;
         </TextBlock>
@@ -91,19 +91,34 @@
                 </Path.Data>
             </Path>
         </Border>
-        <wpf:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" 
+        <wpf:PieChart LegendLocation="Right" DataClick="Chart_OnDataClick" 
                       Hoverable="False" DataTooltip="{x:Null}"
-                      Height="200" Width="200" 
+                      Height="200" Width="300" 
                       HorizontalAlignment="Right" 
                       VerticalAlignment="Top" 
-                      Margin="0,75,85,10">
+                      FontFamily="Product Sans"
+                      Foreground="#5F6368"
+                      Margin="0,75,35,10">
             <wpf:PieChart.Series>
-                <wpf:PieSeries Title="Flagged URL as safe" Values="4" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}" />
-                <wpf:PieSeries Title="Flagged URL as harmful" Values="1" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}" />
+                <wpf:PieSeries Title="...safe" Values="4" DataLabels="True"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#4285F4"/>
+                <wpf:PieSeries Title="...harmful" Values="1" DataLabels="True"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#EA4335"/>
+                <wpf:PieSeries Title="...unknown" Values="0" DataLabels="False"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#D9DADB"/>
             </wpf:PieChart.Series>
         </wpf:PieChart>
+        <TextBlock Name="ChartTitle" Margin="10,120,35,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+                   HorizontalAlignment="Right" FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="13" FontWeight="700" LineHeight="32">
+            <Bold>Flagged URL as...</Bold>
+        </TextBlock>
     </Grid>
 
 </UserControl>

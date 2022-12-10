@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+using Risky_Business.Commands;
+using Risky_Business.ViewModels;
+using Risky_Business.Views;
+using Risky_Business;
 using System.Net;
 using System.IO;
 using System.Net.Http;
@@ -35,24 +42,43 @@ namespace Risky_Business
 
 
         APICaller Caller = new APICaller();
+        public static MainViewModel mainViewModel = new MainViewModel();
         public MainWindow()
         {
+            
             InitializeComponent();
+            
+            
+            //Source for changing views https://github.com/SingletonSean/wpf-tutorials/tree/master/SwitchingViewsMVVM
+            DataContext = mainViewModel;
+            
             CallGateway.Initialize();
-
-
-                       
-        }
-        
-        private void txtSearch_TextChanged(Object sender, TextChangedEventArgs e)
-
-        {
-            TxtSearchPlaceholder.Visibility = TxtSearch.Text != "" ? Visibility.Hidden : Visibility.Visible;
         }
 
-        private async Task RunButtonPressedAsync(object sender, RoutedEventArgs e)
+        private void IntroButtonPressed(object sender, RoutedEventArgs e)
         {
-            string input = TxtSearch.Text;
+            IntroButton.IsEnabled = false;
+        }
+
+        public bool IsAnalyseButtonEnabled
+        {
+            get => AnalysisButton.IsEnabled;
+            set => AnalysisButton.IsEnabled = value;
+        }
+
+        private async void AnalyseButtonPressed(object sender, RoutedEventArgs e)
+        {
+            
+            mainViewModel.UpdateViewCommand.Execute("Analysis");
+            
+            AnalysisButton.IsEnabled = false;
+            IntroButton.IsEnabled = true;
+            
+            string input = "";
+
+            input = IntroView.inputTextBox.Text;
+
+            
             input = input.Trim();
             List<bool> isGoodList;
 
@@ -104,27 +130,25 @@ namespace Risky_Business
                     // create a reason labeled exception
                     
                 }
-
+            Trace.WriteLine(input);
+            //** Put code that uses input here**//
+        
+            
+        
+            async Task GetData()
+            {
+                ////// Testing string just so that the program is able to compile
+                string apiUrl = "epicGoogleAPI";
+                //////
                 
-
-                // Get the response stream and read it into a string
-                //StreamReader responseReader = new StreamReader(response.GetResponseStream());
-                //string responseData = responseReader.ReadToEnd();
-
-                //** Put code that uses input here**//
-
-
-
-
-
-                //private async Task GetData()
-                //{
-                //    var data = await ReturnData(apiUrl, input);
-                //     unfinished
-                //}
-
-
-
+                
+                var data = await APICaller.ReturnData(apiUrl, input);
+                // unfinished
             }
+
+            await Task.Delay(100);
+            AnalysisView.DisplayResults(input);
+
+        }
     }
 }

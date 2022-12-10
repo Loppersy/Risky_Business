@@ -5,26 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Risky_Business"
         mc:Ignorable="d"
-        Title="Risky Business" Height="350" Width="525">
-    <Grid>
+        Title="Risky Business" 
+        Height="500" Width="700" 
+        MinHeight="500" MinWidth="700"
+        MaxHeight="500" MaxWidth="700">
 
-        <TextBlock Margin="10" TextWrapping="Wrap" Height="275" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Bold>RISKY BUSINESS: URLS Malware Analysis</Bold>
-        </TextBlock>
-        <TextBox x:Name="TxtSearch" Height="30" Width="400" TextChanged="txtSearch_TextChanged"  VerticalAlignment="Center" Padding="2,5,0,0" >
-        </TextBox>
-        <Label x:Name="TxtSearchPlaceholder" Content="http://example.com/"
-               Background="Transparent" Opacity="0.5"
-               IsHitTestVisible="False" Height="30" Width="400" />
-        <TextBlock x:Name="Instructions" TextWrapping="WrapWithOverflow"
-                   Background="Transparent" Opacity="1"
-                   IsHitTestVisible="False" Height="200" Width="300">
-            Type an URL in the textbox below. It will be processed by multiple third party services with the use of API calls to output a 'trust score'.
-        </TextBlock>
-        
-        <Button x:Name="RunButton" Height="30" Width="300" VerticalAlignment="Bottom" Margin="80" Content="ANALYSE!"
-                Click="RunButtonPressed">
-            
-        </Button>
-    </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <ContentControl Content="{Binding SelectedViewModel}"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Name="IntroButton" 
+                            Margin="10" 
+                            Height="30" Width="100" 
+                            Content="Back"
+                            BorderBrush="Transparent"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Command="{Binding UpdateViewCommand}" CommandParameter="Intro"
+                            Click="IntroButtonPressed" IsEnabled="False">
+                        
+                            
+                    </Button>
+                    <Button Name="AnalysisButton" Margin="10" Height="30" Width="200" Content="ANALYSE!"
+                            Click="AnalyseButtonPressed" IsEnabled="False" BorderBrush="{x:Null}" Foreground="White">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#1A73E8"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#185ABC"/>
+                                        <Setter Property="Button.Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="2" BlurRadius="7" Opacity="0.8" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Background" Value="#D9DADB"/>
+                                    </Trigger>
+                                    
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Grid>
+    
 </Window>
+

@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="Risky_Business.Views.AnalysisView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Risky_Business.Views"
+             xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="White">
+    <Grid RenderTransformOrigin="0.5 0.5">
+        <TextBlock Name="AnalysisTitle" Margin="10,10,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+                   HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
+                   FontSize="24" FontWeight="700" LineHeight="32">
+            <Bold>Analysis results</Bold>
+        </TextBlock>
+        <TextBlock Name="AnalysedURL" Margin="10,45,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+                   HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="11" LineHeight="32">
+            Analysed URL: &lt;placeholder&gt;
+        </TextBlock>
+
+        <TextBlock x:Name="Results" TextWrapping="WrapWithOverflow"
+                   Background="Transparent" Opacity="1"
+                   IsHitTestVisible="False" 
+                   FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="18" FontWeight="400" LineHeight="35"
+                   Padding="50,50,0,0" 
+                   Width="400"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center">
+            <Bold>Google Safe Browsing:</Bold> {Result} <LineBreak />
+            <Bold>Virus Total:</Bold> {Result} <LineBreak />
+            <Bold>API Number 3:</Bold> {Result} <LineBreak />
+            <Bold>API Number 4:</Bold> {Result} <LineBreak />
+            <Bold>API Number 5:</Bold> {Result} <LineBreak />
+        </TextBlock>
+
+        <TextBlock x:Name="TrustScore" TextWrapping="WrapWithOverflow"
+                   Background="Transparent" Opacity="1"
+                   IsHitTestVisible="False" Height="100" Width="275"
+                   FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="20" FontWeight="400" LineHeight="35"
+                   Padding="0,20,0,0" HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom">
+            <Bold>Trust Score:</Bold> ?? %
+        </TextBlock>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="30,50,300,325" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <Border HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="0,69,30,10">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="0,0,315,225" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <Border HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom"
+                Margin="0,0,30,19">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="0,0,315,90" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <wpf:PieChart LegendLocation="Right" DataClick="Chart_OnDataClick" 
+                      Hoverable="False" DataTooltip="{x:Null}"
+                      Height="200" Width="300" 
+                      HorizontalAlignment="Right" 
+                      VerticalAlignment="Top" 
+                      FontFamily="Product Sans"
+                      Foreground="#5F6368"
+                      Margin="0,75,35,10">
+            <wpf:PieChart.Series>
+                <wpf:PieSeries Title="...safe" Values="4" DataLabels="True"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#4285F4"/>
+                <wpf:PieSeries Title="...harmful" Values="1" DataLabels="True"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#EA4335"/>
+                <wpf:PieSeries Title="...unknown" Values="0" DataLabels="False"
+                               FontFamily="Product Sans"
+                               LabelPoint="{Binding PointLabel}"
+                               Fill="#D9DADB"/>
+            </wpf:PieChart.Series>
+        </wpf:PieChart>
+        <TextBlock Name="ChartTitle" Margin="10,120,35,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+                   HorizontalAlignment="Right" FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="13" FontWeight="700" LineHeight="32">
+            <Bold>Flagged URL as...</Bold>
+        </TextBlock>
+    </Grid>
+
+</UserControl>

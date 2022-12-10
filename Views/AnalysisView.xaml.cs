@@ -31,13 +31,14 @@ namespace Risky_Business.Views
         {
             if(CurrentAnalysisView == null) return;
             
-            CurrentAnalysisView.AnalysisTitle.Text = $"Analysis Results for {url}";
-            CurrentAnalysisView.Results.Text = "";
+            CurrentAnalysisView.AnalysedURL.Text = "Analysed URL: ";
+            CurrentAnalysisView.AnalysedURL.Inlines.Add(new Italic(new Run(url)));
             
+            CurrentAnalysisView.Results.Text = "";
             CurrentAnalysisView.Results.Inlines.Add(new Bold(new Run("Google Safe Browsing: ")));
             CurrentAnalysisView.Results.Inlines.Add("2");
             CurrentAnalysisView.Results.Inlines.Add(new LineBreak());
-            CurrentAnalysisView.Results.Inlines.Add(new Bold(new Run("API Number 2: ")));
+            CurrentAnalysisView.Results.Inlines.Add(new Bold(new Run("Virus Total: ")));
             CurrentAnalysisView.Results.Inlines.Add("3");
             CurrentAnalysisView.Results.Inlines.Add(new LineBreak());
             CurrentAnalysisView.Results.Inlines.Add(new Bold(new Run("API Number 3: ")));

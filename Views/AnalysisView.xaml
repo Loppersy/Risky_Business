@@ -8,34 +8,100 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Background="White">
-    
     <Grid RenderTransformOrigin="0.5 0.5">
-        <TextBlock Name="AnalysisTitle" Margin="10,30,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+        <TextBlock Name="AnalysisTitle" Margin="10,10,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
                    HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
                    FontSize="24" FontWeight="700" LineHeight="32">
-            <Bold>Analysis results for &lt;placeholder&gt;</Bold>
+            <Bold>Analysis results</Bold>
         </TextBlock>
-
+        <TextBlock Name="AnalysedURL" Margin="10,45,10,10" TextWrapping="Wrap" Height="275" VerticalAlignment="Top"
+                   HorizontalAlignment="Center" FontFamily="Product Sans" Foreground="#202124"
+                   FontSize="11" LineHeight="32">
+            Analysed URL: &lt;placeholder&gt;
+        </TextBlock>
 
         <TextBlock x:Name="Results" TextWrapping="WrapWithOverflow"
                    Background="Transparent" Opacity="1"
-                   IsHitTestVisible="False" Height="200" Width="400" 
+                   IsHitTestVisible="False" 
                    FontFamily="Product Sans" Foreground="#5F6368"
                    FontSize="18" FontWeight="400" LineHeight="35"
-                   Padding="0,10,0,40">
-            <Bold>API Number 1:</Bold> {Result} <LineBreak/>
-            <Bold>API Number 2:</Bold> {Result} <LineBreak/>
-            <Bold>API Number 3:</Bold> {Result} <LineBreak/>
-            <Bold>API Number 4:</Bold> {Result} <LineBreak/>
-            <Bold>API Number 5:</Bold> {Result} <LineBreak/>
+                   Padding="50,50,0,0" 
+                   Width="400"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center">
+            <Bold>Google Safe Browsing:</Bold> {Result} <LineBreak />
+            <Bold>Virus Total:</Bold> {Result} <LineBreak />
+            <Bold>API Number 3:</Bold> {Result} <LineBreak />
+            <Bold>API Number 4:</Bold> {Result} <LineBreak />
+            <Bold>API Number 5:</Bold> {Result} <LineBreak />
         </TextBlock>
-        <wpf:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" Hoverable="False" DataTooltip="{x:Null}"
-                      Height="225" Width="225" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="100,0,0,10">
+
+        <TextBlock x:Name="TrustScore" TextWrapping="WrapWithOverflow"
+                   Background="Transparent" Opacity="1"
+                   IsHitTestVisible="False" Height="100" Width="275"
+                   FontFamily="Product Sans" Foreground="#5F6368"
+                   FontSize="20" FontWeight="400" LineHeight="35"
+                   Padding="0,20,0,0" HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom">
+            <Bold>Trust Score:</Bold> ?? %
+        </TextBlock>
+        <Border HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="30,50,300,325" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <Border HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="0,69,30,10">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="0,0,315,225" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <Border HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom"
+                Margin="0,0,30,19">
+            <Path Stroke="#DADCE0" 
+                  StrokeThickness="1"
+                  Fill="Transparent">
+                <Path.Data>
+
+                    <!-- Create a rectangle with rounded corners
+             by giving the RectangleGeometry a RadiusX
+             and a RadiusY of 10.  -->
+                    <RectangleGeometry
+                        Rect="0,0,315,90" RadiusX="10" RadiusY="10" />
+                </Path.Data>
+            </Path>
+        </Border>
+        <wpf:PieChart LegendLocation="Bottom" DataClick="Chart_OnDataClick" 
+                      Hoverable="False" DataTooltip="{x:Null}"
+                      Height="200" Width="200" 
+                      HorizontalAlignment="Right" 
+                      VerticalAlignment="Top" 
+                      Margin="0,75,85,10">
             <wpf:PieChart.Series>
-                <wpf:PieSeries Title="Yes" Values="4" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}"/>
-                <wpf:PieSeries Title="No" Values="1" DataLabels="True"
-                               LabelPoint="{Binding PointLabel}"/>
+                <wpf:PieSeries Title="Flagged URL as safe" Values="4" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}" />
+                <wpf:PieSeries Title="Flagged URL as harmful" Values="1" DataLabels="True"
+                               LabelPoint="{Binding PointLabel}" />
             </wpf:PieChart.Series>
         </wpf:PieChart>
     </Grid>

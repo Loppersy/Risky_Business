@@ -8,7 +8,7 @@ namespace Risky_Business
 {
     public class ResponseModel
     {
-        public int MyProperty { get; set; }
+        public string[] matches { get; set; }
         // set up properties based on expected returns
     }
 }

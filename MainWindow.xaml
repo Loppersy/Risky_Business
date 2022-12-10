@@ -8,7 +8,8 @@
         Title="Risky Business" 
         Height="500" Width="700" 
         MinHeight="500" MinWidth="700"
-        MaxHeight="500" MaxWidth="700">
+        MaxHeight="500" MaxWidth="700"
+        ResizeMode="CanMinimize">
 
             <Grid>
                 <Grid.RowDefinitions>

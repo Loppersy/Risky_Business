@@ -21,5 +21,22 @@ namespace Risky_Business.Views
             TxtSearchPlaceholder.Visibility = TxtSearch.Text != "" ? Visibility.Hidden : Visibility.Visible;
             (Application.Current.MainWindow as MainWindow).IsAnalyseButtonEnabled = TxtSearch.Text != "";
         }
+
+        private void OpenGitHub(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/Loppersy/Risky_Business");
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+                if (noBrowser.ErrorCode==-2147467259)
+                    MessageBox.Show(noBrowser.Message);
+            }
+            catch (System.Exception other)
+            {
+                MessageBox.Show(other.Message);
+            }
+        }
     }
 }
